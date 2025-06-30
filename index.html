@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Perla Jbara | Portfolio</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/scrollreveal"></script>
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: #ffe0f0; /* richer soft pink */
+      color: #4a3c6e; /* dark purple-ish */
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+      margin: 0;
+      padding: 0;
+      position: relative;
+    }
+
+    /* Navbar full height on left */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100vh;
+      width: 80px;
+      background: #c45fae; /* stronger purple-pink */
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 2.5rem;
+      padding: 1rem 0;
+      box-shadow: 2px 0 8px rgba(196, 95, 174, 0.5);
+      z-index: 1000;
+      user-select: none;
+    }
+
+    nav a {
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+      color: #fff0f1;
+      font-weight: 600;
+      font-size: 1.2rem;
+      text-decoration: none;
+      transition: color 0.3s ease, text-shadow 0.3s ease;
+      position: relative;
+      cursor: pointer;
+    }
+
+    nav a:hover {
+      color: #fa9bcf;
+      text-decoration: underline;
+      text-shadow: 0 0 8px #fa9bcf;
+    }
+
+    /* Color highlights on navbar items on hover, matching tech stack */
+    nav a[data-skill="C#"]:hover {
+      color: #239120;
+      text-shadow: 0 0 10px #239120;
+    }
+    nav a[data-skill="Kotlin"]:hover {
+      color: #a97bff;
+      text-shadow: 0 0 10px #a97bff;
+    }
+    nav a[data-skill="React"]:hover {
+      color: #61dafb;
+      text-shadow: 0 0 10px #61dafb;
+    }
+    nav a[data-skill="SQL"]:hover {
+      color: #f29111;
+      text-shadow: 0 0 10px #f29111;
+    }
+    nav a[data-skill="PL/SQL"]:hover {
+      color: #007fa8;
+      text-shadow: 0 0 10px #007fa8;
+    }
+
+    /* Header: flex row with image left and text right */
+    header {
+      min-height: 100vh;
+      margin-left: 80px; /* offset for navbar width */
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 4rem;
+      gap: 4rem;
+      flex-wrap: wrap;
+      text-align: left;
+      position: relative;
+      z-index: 10;
+    }
+
+    header img {
+      width: 220px;
+      height: 220px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 6px solid #fa9bcf;
+      box-shadow: 0 10px 20px rgba(250, 155, 207, 0.5);
+      transition: transform 0.3s ease;
+      flex-shrink: 0;
+    }
+
+    header img:hover {
+      transform: scale(1.05) rotate(5deg);
+    }
+
+    /* Text container for the writing next to picture */
+    .header-text {
+      max-width: 600px;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    /* Solid color for name line */
+    header h1 {
+      font-size: 3.5rem;
+      font-weight: 900;
+      margin: 0;
+      color: #c45fae; /* solid strong pink-purple */
+      user-select: none;
+    }
+
+    /* Typing effect styling */
+    header h2 {
+      font-weight: 700;
+      font-size: 1.8rem;
+      height: 2.5rem;
+      color: #a855f7; /* vibrant purple */
+      min-width: 230px;
+      white-space: nowrap;
+      border-right: 2px solid #a855f7;
+      overflow: hidden;
+      letter-spacing: 0.1em;
+      user-select: none;
+      margin-top: -6px;
+    }
+
+    header p {
+      font-size: 1.125rem;
+      color: #6e5d8f; /* darker muted purple */
+      line-height: 1.6;
+    }
+
+    header a.button-contact {
+      margin-top: 1.5rem;
+      padding: 0.75rem 2.5rem;
+      background: #c45fae;
+      color: #fff0f1;
+      font-weight: 700;
+      font-size: 1.1rem;
+      border-radius: 9999px;
+      box-shadow: 0 8px 15px rgba(196, 95, 174, 0.5);
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+      align-self: flex-start;
+      width: max-content;
+      text-decoration: none;
+      user-select: none;
+    }
+
+    header a.button-contact:hover {
+      background: #fa9bcf;
+      color: #4a3c6e;
+      box-shadow: 0 12px 20px rgba(250, 155, 207, 0.7);
+    }
+
+    /* Sections */
+    section {
+      max-width: 900px;
+      margin: 3rem auto;
+      padding: 0 1rem;
+      position: relative;
+      z-index: 10;
+    }
+
+    section h2 {
+      font-size: 2.25rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+      text-align: center;
+      background: linear-gradient(90deg, #fa9bcf, #c45fae, #a855f7);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      user-select: none;
+    }
+
+    section p {
+      font-size: 1.1rem;
+      color: #4a3c6e;
+      line-height: 1.7;
+      max-width: 700px;
+      margin: 0 auto;
+      user-select: text;
+    }
+
+    /* Projects Grid */
+    .projects-grid {
+      display: grid;
+      gap: 2rem;
+      grid-template-columns: 1fr;
+    }
+
+    @media(min-width: 768px) {
+      .projects-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .project-card {
+      background: #fff0f1;
+      border-radius: 1rem;
+      box-shadow: 0 8px 20px rgba(196, 95, 174, 0.3);
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      color: #4a3c6e;
+    }
+
+    .project-card:hover {
+      transform: translateY(-8px) scale(1.03);
+      box-shadow: 0 12px 30px rgba(196, 95, 174, 0.5);
+    }
+
+    .project-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      user-select: none;
+    }
+
+    .project-card-content {
+      padding: 1rem;
+    }
+
+    .project-card-content h3 {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+      font-weight: 700;
+      color: #c45fae;
+      user-select: none;
+    }
+
+    .project-card-content p {
+      font-size: 0.95rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .project-card-content a {
+      color: #a855f7;
+      font-weight: 600;
+      text-decoration: none;
+      transition: text-decoration 0.3s ease;
+      user-select: none;
+    }
+
+    .project-card-content a:hover {
+      text-decoration: underline;
+    }
+
+    /* Contact Section */
+    #contact {
+      max-width: 600px;
+      margin: 3rem auto;
+      padding: 0 1rem;
+    }
+
+    #contact h2 {
+      text-align: center;
+      margin-bottom: 1rem;
+      user-select: none;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    form input,
+    form textarea {
+      padding: 0.75rem;
+      border-radius: 0.5rem;
+      border: 2px solid #f4dbe9;
+      font-size: 1rem;
+      color: #4a3c6e;
+      font-weight: 600;
+      resize: vertical;
+    }
+
+    form input:focus,
+    form textarea:focus {
+      outline: none;
+      border-color: #c45fae;
+      box-shadow: 0 0 8px #c45fae;
+      background: #fff0f1;
+    }
+
+    form button {
+      padding: 0.75rem;
+      background: #c45fae;
+      border: none;
+      border-radius: 9999px;
+      color: #fff0f1;
+      font-weight: 700;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      user-select: none;
+    }
+
+    form button:hover {
+      background: #fa9bcf;
+      color: #4a3c6e;
+    }
+
+    /* Footer */
+    footer {
+      background: #f4dbe9;
+      text-align: center;
+      padding: 1rem;
+      color: #4a3c6e;
+      font-weight: 600;
+      user-select: none;
+      position: relative;
+      z-index: 10;
+    }
+
+    footer a {
+      color: #c45fae;
+      font-weight: 700;
+      margin: 0 1rem;
+      text-decoration: none;
+      transition: text-decoration 0.3s ease;
+      user-select: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* Floating subtle shapes for some animation */
+    .floating-shape {
+      position: fixed;
+      border-radius: 50%;
+      opacity: 0.12;
+      animation: float 6s ease-in-out infinite;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .shape1 {
+      width: 120px;
+      height: 120px;
+      background: #fa9bcf;
+      top: 10%;
+      left: 15%;
+      animation-delay: 0s;
+    }
+
+    .shape2 {
+      width: 80px;
+      height: 80px;
+      background: #c45fae;
+      top: 50%;
+      right: 10%;
+      animation-delay: 2s;
+    }
+
+    .shape3 {
+      width: 150px;
+      height: 150px;
+      background: #a855f7;
+      bottom: 15%;
+      left: 30%;
+      animation-delay: 4s;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0) translateX(0); }
+      50% { transform: translateY(-20px) translateX(10px); }
+    }
+
+    /* Tech stack tags */
+    .tech-stack {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.8rem;
+      margin-top: 1rem;
+      user-select: none;
+    }
+
+    .tech-tag {
+      padding: 0.5rem 1rem;
+      border-radius: 9999px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: #fff0f1;
+      cursor: default;
+      transition: transform 0.2s ease;
+      user-select: none;
+      box-shadow: 0 4px 8px rgba(196, 95, 174, 0.3);
+      text-align: center;
+      min-width: 70px;
+    }
+
+    .tech-tag:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 12px rgba(250, 155, 207, 0.6);
+    }
+
+    .tag-Csharp { background-color: #239120; }   /* green */
+    .tag-Kotlin { background-color: #a97bff; }   /* purple */
+    .tag-React { background-color: #61dafb; color: #1a1a1a; }    /* react blue with dark text */
+    .tag-SQL { background-color: #f29111; }     /* orange */
+    .tag-PLSQL { background-color: #007fa8; }   /* teal */
+
+    /* Responsive tweaks */
+    @media (max-width: 900px) {
+      header {
+        flex-direction: column;
+        margin-left: 0;
+        padding: 2rem 1rem;
+        text-align: center;
+      }
+      nav {
+        width: 60px;
+      }
+      header img {
+        width: 180px;
+        height: 180px;
+        margin-bottom: 2rem;
+      }
+      .header-text {
+        max-width: 100%;
+        align-items: center;
+      }
+      header h1 {
+        font-size: 2.8rem;
+      }
+      header h2 {
+        min-width: auto;
+        height: auto;
+        border-right: none;
+        white-space: normal;
+        overflow: visible;
+        letter-spacing: normal;
+        margin-bottom: 0.5rem;
+      }
+      header a.button-contact {
+        align-self: center;
+      }
+      nav a {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Floating shapes -->
+  <div class="floating-shape shape1"></div>
+  <div class="floating-shape shape2"></div>
+  <div class="floating-shape shape3"></div>
+
+  <nav>
+    <a href="#about" title="About">About</a>
+    <a href="#techstack" title="Skills">Skills</a>
+    <a href="#projects" title="Projects">Projects</a>
+    <a href="#contact" title="Contact">Contact</a>
+  </nav>
+
+  <header>
+    <img src="/mnt/data/58c583fe-cca2-4d09-a405-0a0ed6220fee.png" alt="Profile picture" />
+    <div class="header-text">
+      <h1>Hey, I'm Perla Jbara!</h1>
+      <h2 id="typing-text"></h2>
+      <p>
+        A creative, driven and ever-curious developer currently pursuing my Master's in Computer Science. I build clean and engaging mobile and web applications that solve real-world problems and look good doing it 💜
+      </p>
+      <a href="#contact" class="button-contact">Contact Me</a>
+    </div>
+  </header>
+
+  <section id="about">
+    <h2>About Me</h2>
+    <p>
+     Hi, I'm <strong>Perla Jbara</strong> — a passionate software developer currently pursuing my <strong>Master’s degree in Computer Science</strong>. I specialize in creating sleek, powerful applications using C#, Kotlin, React, and SQL. I thrive on solving problems that matter, bringing creativity and flair to every project.
+    </p>
+  </section>
+
+  <section id="techstack">
+    <h2>Tech Stack</h2>
+    <div class="tech-stack">
+      <div class="tech-tag tag-Csharp">C#</div>
+      <div class="tech-tag tag-Kotlin">Kotlin</div>
+      <div class="tech-tag tag-React">React</div>
+      <div class="tech-tag tag-SQL">SQL</div>
+      <div class="tech-tag tag-PLSQL">PL/SQL</div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <h2>Projects</h2>
+    <div class="projects-grid">
+      <div class="project-card">
+        <img src="https://source.unsplash.com/featured/?food" alt="Gourmet Guru" />
+        <div class="project-card-content">
+          <h3>Gourmet Guru</h3>
+          <p>A food discovery and recipe mobile app built with Kotlin and Firebase.</p>
+          <a href="https://github.com/yourusername/gourmet-guru" target="_blank" rel="noopener noreferrer">View on GitHub</a>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <img src="https://source.unsplash.com/featured/?car" alt="Antonie Motors" />
+        <div class="project-card-content">
+          <h3>Antonie Motors</h3>
+          <p>Car dealership app available on the Play Store. Built in Kotlin.</p>
+          <a href="https://github.com/yourusername/antonie-motors" target="_blank" rel="noopener noreferrer">View on GitHub</a>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <img src="https://source.unsplash.com/featured/?clock" alt="Timewize" />
+        <div class="project-card-content">
+          <h3>Timewize</h3>
+          <p>A time management and productivity app built using React.</p>
+          <a href="https://github.com/yourusername/timewize" target="_blank" rel="noopener noreferrer">View on GitHub</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2>Contact Me</h2>
+    <form action="https://formsubmit.co/perlajbara27@gmail.com" method="POST" class="contact-form">
+      <input type="text" name="name" placeholder="Your Name" required />
+      <input type="email" name="email" placeholder="Your Email" required />
+      <textarea name="message" rows="6" placeholder="Your Message" required></textarea>
+      <button type="submit">Send</button>
+    </form>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Perla Jbara</p>
+    <div>
+      <a href="https://github.com/perlajbara" target="_blank" rel="noopener noreferrer">GitHub</a>
+      <a href="https://linkedin.com/in/YOUR_LINK_HERE" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+    </div>
+  </footer>
+
+  <script>
+    // ScrollReveal animations
+    ScrollReveal().reveal('header img', { delay: 100, origin: 'left', distance: '40px', duration: 800 });
+    ScrollReveal().reveal('.header-text h1', { delay: 300, origin: 'bottom', distance: '20px', duration: 800 });
+    ScrollReveal().reveal('.header-text h2', { delay: 600, origin: 'top', distance: '30px', duration: 800 });
+    ScrollReveal().reveal('.header-text p', { delay: 800, origin: 'bottom', distance: '30px', duration: 800 });
+    ScrollReveal().reveal('.button-contact', { delay: 1000, origin: 'bottom', distance: '20px', duration: 800 });
+    ScrollReveal().reveal('#about', { delay: 1100, origin: 'bottom', distance: '50px', duration: 800 });
+    ScrollReveal().reveal('#techstack', { delay: 1200, origin: 'bottom', distance: '50px', duration: 800 });
+    ScrollReveal().reveal('#projects', { delay: 1300, origin: 'bottom', distance: '50px', duration: 800 });
+    ScrollReveal().reveal('#contact', { delay: 1500, origin: 'bottom', distance: '50px', duration: 800 });
+    ScrollReveal().reveal('footer', { delay: 1700, origin: 'bottom', distance: '20px', duration: 800 });
+
+    // Typing effect for "I'm a Software Developer"
+    const typingText = "I'm a Software Developer";
+    const typingElement = document.getElementById('typing-text');
+    let charIndex = 0;
+    let typingTimeout;
+
+    function typeWriter() {
+      if (charIndex < typingText.length) {
+        typingElement.textContent += typingText.charAt(charIndex);
+        charIndex++;
+        typingTimeout = setTimeout(typeWriter, 100);
+      } else {
+        setTimeout(() => {
+          typingElement.textContent = '';
+          charIndex = 0;
+          typeWriter();
+        }, 3000);
+      }
+    }
+
+    // Start typing on load
+    window.addEventListener('load', () => {
+      typingElement.textContent = '';
+      charIndex = 0;
+      typeWriter();
+    });
+
+    // Restart typing when user scrolls to top
+    window.addEventListener('scroll', () => {
+      if(window.scrollY === 0 && typingElement.textContent === '') {
+        typeWriter();
+      }
+    });
+  </script>
+</body>
+</html>
