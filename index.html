@@ -99,6 +99,18 @@
     .form-label { position: absolute; left: 0; top: 1rem; color: #666; font-family: var(--font-display); pointer-events: none; transition: var(--transition); letter-spacing: 0.2em; font-size: 0.8rem; }
     .form-input:focus ~ .form-label, .form-input:not(:placeholder-shown) ~ .form-label { top: -1.8rem; font-size: 0.7rem; color: var(--gold-light); }
 
+/* Animation for the card spin */
+@keyframes cardSpin {
+  0% { transform: scale(1) rotateY(0); }
+  50% { transform: scale(0.5) rotateY(180deg); opacity: 0.5; }
+  100% { transform: scale(0) rotateY(360deg); opacity: 0; }
+}
+
+.spinning {
+  animation: cardSpin 0.8s ease-in-out forwards;
+  pointer-events: none; /* Prevent double clicks */
+}
+
     /* MOBILE RESPONSIVE QUERIES */
     @media (max-width: 768px) {
       * { cursor: auto !important; }
@@ -205,29 +217,34 @@
 
     <section id="work" style="padding: 5rem 5%;">
       <h2 class="section-title">Project <em>Vault</em></h2>
-      <div class="project-grid">
-        <div class="project-card">
-          <img src="images/gourmetguru/gglogo.png" class="project-img">
-          <div style="padding: 2rem;">
-            <div style="margin-bottom: 1rem;"><span class="tag">ANDROID</span> <span class="tag">MOBILE</span> </div>
-            <h3 style="font-family: var(--font-serif); font-size: 2rem; color: var(--gold-light);">Gourmet Guru</h3>
-          </div>
-        </div>
-        <div class="project-card">
-          <img src="images/antoniemotors/amlogo.jpeg" class="project-img">
-          <div style="padding: 2rem;">
-            <div style="margin-bottom: 1rem;"><span class="tag">MOBILE & WEB</span></div>
-            <h3 style="font-family: var(--font-serif); font-size: 2rem; color: var(--gold-light);">Antonie Motors</h3>
-          </div>
-        </div>
-        <div class="project-card">
-          <img src="images/timewize/twindexpage.png" class="project-img">
-          <div style="padding: 2rem;">
-            <div style="margin-bottom: 1rem;"><span class="tag">ANDROID STUDIO</span></div>
-            <h3 style="font-family: var(--font-serif); font-size: 2rem; color: var(--gold-light);">Timewize</h3>
-          </div>
-        </div>
-      </div>
+    <div class="project-grid">
+  <!-- Gourmet Guru -->
+  <div class="project-card" data-url="gourmet-guru.html" onclick="handleProjectClick(this)">
+    <img src="images/gourmetguru/gglogo.png" class="project-img">
+    <div style="padding: 2rem;">
+      <div style="margin-bottom: 1rem;"><span class="tag">ANDROID</span> <span class="tag">MOBILE</span> </div>
+      <h3 style="font-family: var(--font-serif); font-size: 2rem; color: var(--gold-light);">Gourmet Guru</h3>
+    </div>
+  </div>
+
+  <!-- Antonie Motors -->
+  <div class="project-card" data-url="antonie-motors.html" onclick="handleProjectClick(this)">
+    <img src="images/antoniemotors/amlogo.jpeg" class="project-img">
+    <div style="padding: 2rem;">
+      <div style="margin-bottom: 1rem;"><span class="tag">MOBILE & WEB</span></div>
+      <h3 style="font-family: var(--font-serif); font-size: 2rem; color: var(--gold-light);">Antonie Motors</h3>
+    </div>
+  </div>
+
+  <!-- Timewize -->
+  <div class="project-card" data-url="timewize.html" onclick="handleProjectClick(this)">
+    <img src="images/timewize/twindexpage.png" class="project-img">
+    <div style="padding: 2rem;">
+      <div style="margin-bottom: 1rem;"><span class="tag">ANDROID STUDIO</span></div>
+      <h3 style="font-family: var(--font-serif); font-size: 2rem; color: var(--gold-light);">Timewize</h3>
+    </div>
+  </div>
+</div>
     </section>
 
     <section id="contact" style="padding: 5rem 5%; text-align: center; max-width: 800px; margin: 0 auto;">
@@ -277,6 +294,21 @@
       cursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
       follower.style.transform = `translate(${e.clientX - 16}px, ${e.clientY - 16}px)`;
     });
+
+   function handleProjectClick(card) {
+    const destination = card.getAttribute('data-url');
+    console.log("Spinning towards:", destination); // This helps us debug!
+    
+    // 1. Add the spin class
+    card.classList.add('spinning');
+
+    // 2. Navigate after the animation finishes
+    if (destination) {
+      setTimeout(() => {
+        window.location.href = destination;
+      }, 800);
+    }
+  }
   </script>
 </body>
 </html>
