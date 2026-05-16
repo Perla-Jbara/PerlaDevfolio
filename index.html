@@ -34,7 +34,7 @@
       color: var(--text-main);
       font-family: 'Inter', sans-serif;
       overflow-x: hidden;
-      cursor: none;
+      cursor: auto;
     }
 
     /* PARTICLES */
@@ -254,13 +254,18 @@
     }
 
     /* HERO */
-    .hero {
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding-left: 10%;
-    }
+   .hero {
+
+  min-height: 100vh;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  position: relative;
+
+  padding: 0 8%;
+}
 
     .name-container span {
       display: block;
@@ -318,6 +323,14 @@
       padding: 12px;
       background: linear-gradient(45deg, var(--gold-dark), var(--gold-light));
       animation: pulseGlow 4s infinite alternate;
+      transition: var(--transition);
+      cursor: pointer;
+      perspective: 1000px;
+    }
+
+    .portrait-frame:hover {
+      transform: scale(1.08) rotateY(5deg) rotateX(-5deg);
+      filter: brightness(1.15);
     }
 
     .portrait-frame img {
@@ -325,6 +338,7 @@
       height: 100%;
       border-radius: 50%;
       object-fit: cover;
+      transition: inherit;
     }
 
     @keyframes pulseGlow {
@@ -384,7 +398,8 @@
 
   backdrop-filter: blur(20px);
 
-  z-index: 10;
+  z-index: 50;
+  pointer-events: auto;
 
   transition: 0.4s ease;
 }
@@ -763,9 +778,76 @@
         text-align: center;
       }
 
-      .name-container {
-        font-size: clamp(5rem, 18vw, 8rem) !important;
+      /* Ensure hero centers and stacks cleanly on mobile */
+      .hero {
+        justify-content: center;
+        padding: 4% 5%;
       }
+
+      /* Make hero stack and scale better on small screens */
+      .hero {
+        padding: 4% 5%;
+        min-height: auto;
+      }
+
+      .hero-content {
+        flex-direction: column;
+        gap: 1.5rem;
+        align-items: center;
+        justify-content: flex-start;
+        width: 100%;
+        max-width: 900px;
+        margin-inline: auto;
+      }
+
+      .hero-text {
+        width: 100%;
+      }
+
+      .name-container {
+        font-size: clamp(3.5rem, 12vw, 6.5rem) !important;
+        line-height: 0.9;
+        text-align: center;
+        width: 100%;
+        margin-top: 20vh; /* push name down on initial load */
+        transform: translateZ(0);
+      }
+
+      .hero-model {
+        position: sticky !important;
+        top: 8px !important;
+        left: auto !important;
+        transform: none !important;
+        width: min(340px, 78vw);
+        height: auto;
+        aspect-ratio: 1/1;
+        margin: 0.6rem auto 0 auto;
+        z-index: 5;
+      }
+
+      /* Ensure the hero has space to scroll so sticky works */
+      .hero {
+        padding-top: 6vh;
+        min-height: 140vh;
+      }
+
+      /* Hide model initially on mobile; reveal when user scrolls or touches */
+      .hero-model {
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-8px);
+        pointer-events: none;
+        transition: opacity 0.45s ease, transform 0.45s ease, visibility 0.2s;
+      }
+
+      .hero-model.revealed {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+        pointer-events: auto;
+      }
+
+      /* removed conflicting duplicate font-size to keep sizing consistent */
 
       .section-title {
         text-align: center;
@@ -812,6 +894,39 @@
         100% {
           transform: translateX(0);
         }
+      }
+    }
+
+    /* Extra small phones */
+    @media (max-width: 480px) {
+      .section-title {
+        font-size: 2.4rem;
+        text-align: center;
+      }
+
+      .name-container {
+        font-size: clamp(2.8rem, 14vw, 5rem) !important;
+      }
+
+      .cv-btn {
+        display: block;
+        width: 100%;
+        padding: 0.9rem 1rem;
+        margin-top: 1rem;
+        text-align: center;
+      }
+
+      .portrait-frame {
+        width: min(260px, 50vw);
+      }
+
+      .project-card .project-img {
+        height: 200px;
+      }
+
+      .tech-card {
+        min-width: 140px;
+        padding: 1rem;
       }
     }
 
@@ -1131,12 +1246,127 @@ details[open] summary::after {
   box-shadow: 0 0 15px rgba(212,160,160,0.5);
 }
 
+
+/* ===== HERO MODEL ===== */
+
+.hero-model {
+
+  position: absolute;
+
+  right: 5%;
+  top: 50%;
+
+  transform: translateY(-50%);
+
+  width: 500px;
+  height: 500px;
+
+  z-index: 2;
+
+  filter:
+    drop-shadow(0 0 25px rgba(212,160,160,0.35))
+    drop-shadow(0 0 80px rgba(212,160,160,0.18));
+
+  animation: floatModel 6s ease-in-out infinite;
+}
+
+/* floating animation */
+@keyframes floatModel {
+
+  0% {
+    transform: translateY(-50%) translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-50%) translateY(-18px);
+  }
+
+  100% {
+    transform: translateY(-50%) translateY(0px);
+  }
+}
+
+/* model viewer itself */
+model-viewer {
+  width: 100%;
+  height: 100%;
+
+  --poster-color: transparent;
+
+  background: transparent;
+}
+
+@media (max-width: 900px) {
+  .hero-content {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .hero-model {
+    width: 300px;
+    height: 300px;
+    margin-top: 2rem;
+  }
+
+  .cv-btn {
+    margin-inline: auto;
+  }
+}
+
+.hero-content {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4rem;
+}
+
+.hero-text {
+  flex: 1;
+}
+
+.hero-model {
+
+  position: relative;
+
+  right: auto;
+  top: auto;
+
+  transform: none;
+
+  width: 480px;
+  height: 480px;
+
+  margin-top: 3rem;
+}
+
 /* ===== TEXT ===== */
 
 .pearl-item span {
   color: var(--gold-light);
   font-weight: 600;
 }
+
+  /* Center the hero logo/model */
+  .hero .hero-model {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    right: auto;
+    margin: 0;
+    z-index: 2;
+  }
+
+  @media (max-width: 900px) {
+    .hero .hero-model {
+      position: relative;
+      left: auto;
+      top: auto;
+      transform: none;
+      margin-top: 3rem;
+    }
+  }
 
   </style>
 </head>
@@ -1167,12 +1397,19 @@ details[open] summary::after {
   <main>
 
     <!-- HERO -->
-    <section class="hero" id="home">
+    <!-- HERO -->
+<section class="hero" id="home">
 
+  <div class="hero-content">
+
+    <!-- LEFT SIDE TEXT -->
+    <div class="hero-text">
+
+      <!-- NAME (BIGGER) -->
       <div class="name-container"
       style="
       font-family: var(--font-serif);
-      font-size: clamp(7rem, 19vw, 14rem);
+      font-size: clamp(9rem, 22vw, 16rem);
       line-height: 0.82;
       ">
 
@@ -1188,21 +1425,53 @@ details[open] summary::after {
 
       </div>
 
-      <div style="margin-top: 1.5rem;">
+      <!-- ROLE UNDER NAME -->
+      <div style="margin-top: 1.2rem;">
         <span style="
-        letter-spacing: 0.5em;
-        color: var(--gold-light);
-        font-size: 0.8rem;
+          letter-spacing: 0.45em;
+          color: var(--gold-light);
+          font-size: 0.85rem;
         ">
           FULL STACK SOFTWARE ENGINEER
         </span>
       </div>
 
-      <a href="cv.pdf" download class="cv-btn">
-        DOWNLOAD CV
-      </a>
+      <!-- BUTTON UNDER ROLE -->
+      <div style="margin-top: 2rem;">
+        <a href="cv.pdf" download class="cv-btn">
+          DOWNLOAD CV
+        </a>
+      </div>
 
-    </section>
+    </div>
+
+    <!-- RIGHT SIDE 3D MODEL -->
+    <div class="hero-model">
+
+      <model-viewer
+        src="/images/models/logo.glb"
+        alt="Perla Logo"
+
+        auto-rotate
+        rotation-per-second="10deg"
+
+        camera-controls
+        disable-zoom
+        interaction-prompt="none"
+
+        shadow-intensity="1"
+        exposure="1.2"
+        environment-image="neutral"
+
+        style="width:100%; height:100%;"
+      >
+      </model-viewer>
+
+    </div>
+
+  </div>
+
+</section>
 
     <!-- ABOUT -->
     <section id="about" style="padding: 10rem 5%;">
@@ -1246,7 +1515,7 @@ details[open] summary::after {
 
      <div class="tech-wrapper">
 
-  <button class="tech-arrow left" onclick="scrollTech(-1)">‹</button>
+  <button type="button" class="tech-arrow left" aria-label="scroll left">‹</button>
 
   <div class="tech-grid" id="techGrid">
 
@@ -1268,7 +1537,7 @@ details[open] summary::after {
 
   </div>
 
-  <button class="tech-arrow right" onclick="scrollTech(1)">›</button>
+  <button type="button" class="tech-arrow right" aria-label="scroll right">›</button>
 
 </div>
 
@@ -1530,17 +1799,17 @@ details[open] summary::after {
         Get In<em>Touch</em>
       </h2>
 
-      <form>
+      <form id="contactForm">
 
         <div class="form-group">
-          <input type="text" class="form-input" id="userName" placeholder=" " required>
+          <input type="text" class="form-input" id="userName" name="name" placeholder=" " required>
           <label class="form-label" for="userName">
             NAME & SURNAME
           </label>
         </div>
 
         <div class="form-group">
-          <input type="email" class="form-input" id="userEmail" placeholder=" " required>
+          <input type="email" class="form-input" id="userEmail" name="email" placeholder=" " required>
           <label class="form-label" for="userEmail">
             EMAIL ADDRESS
           </label>
@@ -1549,6 +1818,7 @@ details[open] summary::after {
         <div class="form-group">
           <textarea class="form-input"
           id="userMsg"
+          name="message"
           rows="1"
           placeholder=" "
           style="resize:none;"></textarea>
@@ -1558,9 +1828,11 @@ details[open] summary::after {
           </label>
         </div>
 
-        <button type="submit" class="cv-btn">
+        <button type="submit" class="cv-btn" id="submitBtn">
           SEND ENQUIRY
         </button>
+        
+        <div id="formMessage" style="margin-top: 1.5rem; text-align: center; font-size: 0.9rem; display: none;"></div>
 
       </form>
 
@@ -1644,21 +1916,40 @@ details[open] summary::after {
 
     /* CURSOR */
 
-    if (window.innerWidth > 768) {
-
+    (function initCustomCursor() {
       const cursor = document.getElementById('cursor');
       const follower = document.getElementById('cursor-follower');
+      if (!cursor || !follower) return;
 
-      document.addEventListener('mousemove', (e) => {
+      let mouseHandler = null;
 
-        cursor.style.transform =
-        `translate(${e.clientX}px, ${e.clientY}px)`;
+      function enableCursor() {
+        if (mouseHandler) return; // already enabled
+        document.body.style.cursor = 'none';
+        mouseHandler = (e) => {
+          cursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+          follower.style.transform = `translate(${e.clientX - 16}px, ${e.clientY - 16}px)`;
+        };
+        document.addEventListener('mousemove', mouseHandler);
+      }
 
-        follower.style.transform =
-        `translate(${e.clientX - 16}px, ${e.clientY - 16}px)`;
+      function disableCursor() {
+        if (mouseHandler) {
+          document.removeEventListener('mousemove', mouseHandler);
+          mouseHandler = null;
+        }
+        document.body.style.cursor = 'auto';
+      }
 
-      });
-    }
+      function checkSize() {
+        if (window.innerWidth > 768) enableCursor();
+        else disableCursor();
+      }
+
+      // init and keep in sync on resize
+      checkSize();
+      window.addEventListener('resize', checkSize);
+    })();
 
     /* NAV ACTIVE SECTION */
 
@@ -1751,7 +2042,22 @@ document.addEventListener("DOMContentLoaded", () => {
     requestAnimationFrame(autoMove);
   }
 
+  // start loop
   autoMove();
+
+  // Allow user interactions to pause auto-scroll and resume after idle
+  let resumeTimer = null;
+  function pauseAutoScroll(ms = 2000) {
+    autoScroll = false;
+    if (resumeTimer) clearTimeout(resumeTimer);
+    resumeTimer = setTimeout(() => { autoScroll = true; }, ms);
+  }
+
+  // pause on direct interactions
+  techGrid.addEventListener('pointerdown', () => pauseAutoScroll(2500), { passive: true });
+  techGrid.addEventListener('touchstart', () => pauseAutoScroll(2500), { passive: true });
+  techGrid.addEventListener('scroll', () => pauseAutoScroll(1500), { passive: true });
+  techGrid.addEventListener('wheel', () => pauseAutoScroll(1500), { passive: true });
 
   // ===== PAUSE ON HOVER =====
   techGrid.addEventListener("mouseenter", () => {
@@ -1770,11 +2076,138 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   };
 
+  // Attach click handlers to arrow buttons (robust fallback)
+  const arrowButtons = document.querySelectorAll('.tech-arrow');
+  arrowButtons.forEach(btn => {
+    const handler = (e) => {
+      if (e.cancelable) e.preventDefault();
+      const dir = btn.classList.contains('left') ? -1 : 1;
+      techGrid.scrollBy({ left: dir * 250, behavior: 'smooth' });
+    };
+
+    btn.addEventListener('click', handler, { passive: false });
+    btn.addEventListener('touchstart', handler, { passive: true });
+  });
+
+  // Ensure arrows are tappable on small screens by bringing them to front
+  document.querySelectorAll('.tech-arrow').forEach(b => b.style.zIndex = '60');
+
+  // ===== CONTACT FORM HANDLER (waits for EmailJS) =====
+  function initContactForm() {
+    if (typeof emailjs === 'undefined') {
+      // emailjs not ready yet, retry in 100ms
+      setTimeout(initContactForm, 100);
+      return;
+    }
+
+    const contactForm = document.getElementById('contactForm');
+    if (contactForm) {
+      contactForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const submitBtn = document.getElementById('submitBtn');
+        const formMessage = document.getElementById('formMessage');
+        const userName = document.getElementById('userName').value.trim();
+        const userEmail = document.getElementById('userEmail').value.trim();
+        const userMsg = document.getElementById('userMsg').value.trim();
+
+        if (!userName || !userEmail || !userMsg) {
+          formMessage.textContent = 'Please fill in all fields.';
+          formMessage.style.color = 'var(--gold-light)';
+          formMessage.style.display = 'block';
+          return;
+        }
+
+        // Show loading state
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'SENDING...';
+        formMessage.style.display = 'none';
+
+        try {
+          // Send via EmailJS
+          const response = await emailjs.send(
+            'service_w0y8mi5',           // your EmailJS Service ID
+            'template_yt5z9ai',          // your EmailJS Template ID
+            {
+              from_name: userName,
+              from_email: userEmail,
+              message: userMsg
+            }
+          );
+
+          formMessage.textContent = '✓ Message sent! I\'ll get back to you soon.';
+          formMessage.style.color = 'var(--gold-light)';
+          formMessage.style.display = 'block';
+          contactForm.reset();
+        } catch (error) {
+          console.error('EmailJS Error:', error);
+          formMessage.textContent = '✗ Error sending message. Please try again.';
+          formMessage.style.color = '#ff6b6b';
+          formMessage.style.display = 'block';
+        } finally {
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'SEND ENQUIRY';
+        }
+      });
+    }
+  }
+
+  initContactForm();
+
 });
 
 
 
   </script>
+
+<!-- EmailJS SDK with async loading -->
+<script async src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/index.min.js" onload="emailjs.init('5rVtGNS8EdizDtf9j');"></script>
+
+<!-- 3d model script here -->
+<script>
+// Reveal the hero model on mobile when the user scrolls or touches the screen
+(function () {
+  if (typeof window === 'undefined') return;
+
+  function initMobileModelReveal() {
+    if (window.innerWidth > 768) return;
+
+    const heroModel = document.querySelector('.hero-model');
+    if (!heroModel) return;
+
+    let revealed = false;
+
+    function reveal() {
+      if (revealed) return;
+      heroModel.classList.add('revealed');
+      revealed = true;
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('touchstart', onTouch);
+    }
+
+    function onScroll() {
+      if (window.scrollY > 20) reveal();
+    }
+
+    function onTouch() {
+      reveal();
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('touchstart', onTouch, { passive: true });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initMobileModelReveal);
+  } else {
+    initMobileModelReveal();
+  }
+
+})();
+</script>
+<script type="module"
+src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js">
+</script>
 
 </body>
 </html>
