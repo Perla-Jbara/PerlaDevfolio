@@ -1787,427 +1787,344 @@ model-viewer {
     </section>
 
     <!-- CONTACT -->
-    <section id="contact"
-    style="
-    padding:5rem 5%;
-    text-align:center;
-    max-width:800px;
-    margin:0 auto;
-    ">
-
-      <h2 class="section-title">
-        Get In<em>Touch</em>
-      </h2>
-
-      <form id="contactForm">
-
-        <div class="form-group">
-          <input type="text" class="form-input" id="userName" name="name" placeholder=" " required>
-          <label class="form-label" for="userName">
-            NAME & SURNAME
-          </label>
-        </div>
-
-        <div class="form-group">
-          <input type="email" class="form-input" id="userEmail" name="email" placeholder=" " required>
-          <label class="form-label" for="userEmail">
-            EMAIL ADDRESS
-          </label>
-        </div>
-
-        <div class="form-group">
-          <textarea class="form-input"
-          id="userMsg"
-          name="message"
-          rows="1"
-          placeholder=" "
-          style="resize:none;"></textarea>
-
-          <label class="form-label" for="userMsg">
-            YOUR MESSAGE
-          </label>
-        </div>
-
-        <button type="submit" class="cv-btn" id="submitBtn">
-          SEND ENQUIRY
-        </button>
-        
-        <div id="formMessage" style="margin-top: 1.5rem; text-align: center; font-size: 0.9rem; display: none;"></div>
-
-      </form>
-
-    </section>
-
-  </main>
-
-  <script>
-
-    
-
-    /* PARTICLES */
-
-    const canvas = document.getElementById('particleCanvas');
-    const ctx = canvas.getContext('2d');
-
-    let particles = [];
-
-    function initCanvas() {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    }
-
-    class Particle {
-      constructor() {
-        this.reset();
-      }
-
-      reset() {
-        this.x = Math.random() * canvas.width;
-        this.y = Math.random() * canvas.height;
-        this.size = Math.random() * 1.5 + 0.5;
-        this.speedX = (Math.random() - 0.5) * 0.4;
-        this.speedY = (Math.random() - 0.5) * 0.4;
-        this.opacity = Math.random() * 0.5;
-      }
-
-      update() {
-        this.x += this.speedX;
-        this.y += this.speedY;
-
-        if (
-          this.x < 0 ||
-          this.x > canvas.width ||
-          this.y < 0 ||
-          this.y > canvas.height
-        ) {
-          this.reset();
-        }
-      }
-
-      draw() {
-        ctx.fillStyle = `rgba(212,160,160,${this.opacity})`;
-
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fill();
-      }
-    }
-
-    initCanvas();
-
-   for (let i = 0; i < 115; i++) {
-      particles.push(new Particle());
-    }
-
-    function animate() {
-      ctx.clearRect(0,0,canvas.width,canvas.height);
-
-      particles.forEach(p => {
-        p.update();
-        p.draw();
-      });
-
-      requestAnimationFrame(animate);
-    }
-
-    animate();
-
-    window.addEventListener('resize', initCanvas);
-
-    /* CURSOR */
-
-    (function initCustomCursor() {
-      const cursor = document.getElementById('cursor');
-      const follower = document.getElementById('cursor-follower');
-      if (!cursor || !follower) return;
-
-      let mouseHandler = null;
-
-      function enableCursor() {
-        if (mouseHandler) return; // already enabled
-        document.body.style.cursor = 'none';
-        mouseHandler = (e) => {
-          cursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
-          follower.style.transform = `translate(${e.clientX - 16}px, ${e.clientY - 16}px)`;
-        };
-        document.addEventListener('mousemove', mouseHandler);
-      }
-
-      function disableCursor() {
-        if (mouseHandler) {
-          document.removeEventListener('mousemove', mouseHandler);
-          mouseHandler = null;
-        }
-        document.body.style.cursor = 'auto';
-      }
-
-      function checkSize() {
-        if (window.innerWidth > 768) enableCursor();
-        else disableCursor();
-      }
-
-      // init and keep in sync on resize
-      checkSize();
-      window.addEventListener('resize', checkSize);
-    })();
-
-    /* NAV ACTIVE SECTION */
-
-    const sections = document.querySelectorAll("section");
-    const navLinks = document.querySelectorAll(".nav-link");
-
-    window.addEventListener("scroll", () => {
-
-      let current = "";
-
-      sections.forEach(section => {
-
-        const sectionTop = section.offsetTop;
-
-        if (pageYOffset >= sectionTop - 200) {
-          current = section.getAttribute("id");
-        }
-      });
-
-      navLinks.forEach(link => {
-
-        link.classList.remove("active");
-
-        if (link.getAttribute("href") === `#${current}`) {
-          link.classList.add("active");
-        }
-      });
-    });
-
-    /* PROJECT TRANSITION */
-
-    function handleProjectClick(card) {
-
-  const destination = card.getAttribute('data-url');
-
-  card.classList.add('spinning');
-
-  const container = document.getElementById('pearlTransition');
-
-  container.innerHTML = '';
-
-  for (let i = 0; i < 170; i++) {
-
-    const pearl = document.createElement('div');
-
-    pearl.classList.add('pearl');
-
-    const size = (Math.random() * 18) + 10;
-
-    pearl.style.width = size + 'px';
-    pearl.style.height = size + 'px';
-
-    pearl.style.left = Math.random() * 100 + 'vw';
-
-    pearl.style.animationDelay =
-    (Math.random() * 0.35) + 's';
-
-    pearl.style.animationDuration =
-    (Math.random() * 0.8 + 1.8) + 's';
-
-    container.appendChild(pearl);
-  }
-
-  setTimeout(() => {
-    window.location.href = destination;
-  }, 1900);
-}
-
-
-//tech stack movement 
-
+<!-- CONTACT -->
+<section id="contact"
+  style="
+  padding:5rem 5%;
+  text-align:center;
+  max-width:800px;
+  margin:0 auto;
+  ">
+
+  <h2 class="section-title">
+    Get In <em>Touch</em>
+  </h2>
+
+  <form id="contactForm">
+
+    <div class="form-group">
+      <input type="text" class="form-input" id="userName" name="from_name" placeholder=" " required>
+      <label class="form-label" for="userName">NAME & SURNAME</label>
+    </div>
+
+    <div class="form-group">
+      <input type="email" class="form-input" id="userEmail" name="from_email" placeholder=" " required>
+      <label class="form-label" for="userEmail">EMAIL ADDRESS</label>
+    </div>
+
+    <div class="form-group">
+      <textarea
+        class="form-input"
+        id="userMsg"
+        name="message"
+        rows="4"
+        placeholder=" "
+        style="resize:none;"
+        required></textarea>
+
+      <label class="form-label" for="userMsg">YOUR MESSAGE</label>
+    </div>
+
+    <button type="submit" class="cv-btn" id="submitBtn">
+      SEND ENQUIRY
+    </button>
+
+    <div id="formMessage"
+      style="margin-top: 1.5rem; text-align: center; font-size: 0.9rem; display: none;">
+    </div>
+
+  </form>
+</section>
+
+  <!-- EmailJS CDN (MUST be above script) -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
+<script>
 document.addEventListener("DOMContentLoaded", () => {
 
-  const techGrid = document.getElementById("techGrid");
-  if (!techGrid) return;
 
-  let autoScroll = true;
 
-  // ===== AUTO SCROLL =====
-  function autoMove() {
-    if (autoScroll) {
-      techGrid.scrollLeft += 0.5;
+  /* =========================
+     EMAILJS INIT
+  ========================= */
+  emailjs.init("5rVtGNS8EdizDtf9j");
 
-      // loop back smoothly
-      if (techGrid.scrollLeft >= techGrid.scrollWidth - techGrid.clientWidth) {
-        techGrid.scrollLeft = 0;
-      }
-    }
+  const contactForm = document.getElementById("contactForm");
+  const submitBtn = document.getElementById("submitBtn");
+  const formMessage = document.getElementById("formMessage");
 
-    requestAnimationFrame(autoMove);
+  if (!contactForm) {
+    console.error("Contact form not found!");
+    return;
   }
 
-  // start loop
-  autoMove();
+  contactForm.addEventListener("submit", async (e) => {
+    e.preventDefault(); // 
 
-  // Allow user interactions to pause auto-scroll and resume after idle
-  let resumeTimer = null;
-  function pauseAutoScroll(ms = 2000) {
-    autoScroll = false;
-    if (resumeTimer) clearTimeout(resumeTimer);
-    resumeTimer = setTimeout(() => { autoScroll = true; }, ms);
-  }
+    const name = document.getElementById("userName").value.trim();
+    const email = document.getElementById("userEmail").value.trim();
+    const message = document.getElementById("userMsg").value.trim();
 
-  // pause on direct interactions
-  techGrid.addEventListener('pointerdown', () => pauseAutoScroll(2500), { passive: true });
-  techGrid.addEventListener('touchstart', () => pauseAutoScroll(2500), { passive: true });
-  techGrid.addEventListener('scroll', () => pauseAutoScroll(1500), { passive: true });
-  techGrid.addEventListener('wheel', () => pauseAutoScroll(1500), { passive: true });
+    console.log("Form submitted:", { name, email, message });
 
-  // ===== PAUSE ON HOVER =====
-  techGrid.addEventListener("mouseenter", () => {
-    autoScroll = false;
-  });
-
-  techGrid.addEventListener("mouseleave", () => {
-    autoScroll = true;
-  });
-
-  // ===== ARROW FUNCTION (IMPORTANT FIX) =====
-  window.scrollTech = function (dir) {
-    techGrid.scrollBy({
-      left: dir * 250,
-      behavior: "smooth"
-    });
-  };
-
-  // Attach click handlers to arrow buttons (robust fallback)
-  const arrowButtons = document.querySelectorAll('.tech-arrow');
-  arrowButtons.forEach(btn => {
-    const handler = (e) => {
-      if (e.cancelable) e.preventDefault();
-      const dir = btn.classList.contains('left') ? -1 : 1;
-      techGrid.scrollBy({ left: dir * 250, behavior: 'smooth' });
-    };
-
-    btn.addEventListener('click', handler, { passive: false });
-    btn.addEventListener('touchstart', handler, { passive: true });
-  });
-
-  // Ensure arrows are tappable on small screens by bringing them to front
-  document.querySelectorAll('.tech-arrow').forEach(b => b.style.zIndex = '60');
-
-  // ===== CONTACT FORM HANDLER (waits for EmailJS) =====
-  function initContactForm() {
-    if (typeof emailjs === 'undefined') {
-      // emailjs not ready yet, retry in 100ms
-      setTimeout(initContactForm, 100);
+    if (!name || !email || !message) {
+      formMessage.textContent = "Please fill in all fields.";
+      formMessage.style.color = "#ffcc00";
+      formMessage.style.display = "block";
       return;
     }
 
-    const contactForm = document.getElementById('contactForm');
-    if (contactForm) {
-      contactForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
+    submitBtn.disabled = true;
+    submitBtn.textContent = "SENDING...";
+    formMessage.style.display = "none";
 
-        const submitBtn = document.getElementById('submitBtn');
-        const formMessage = document.getElementById('formMessage');
-        const userName = document.getElementById('userName').value.trim();
-        const userEmail = document.getElementById('userEmail').value.trim();
-        const userMsg = document.getElementById('userMsg').value.trim();
-
-        if (!userName || !userEmail || !userMsg) {
-          formMessage.textContent = 'Please fill in all fields.';
-          formMessage.style.color = 'var(--gold-light)';
-          formMessage.style.display = 'block';
-          return;
+    try {
+      const response = await emailjs.send(
+        "service_w0y8mi5",
+        "template_yt5z9ai",
+        {
+          from_name: name,    
+          from_email: email,
+          message: message
         }
+      );
 
-        // Show loading state
-        submitBtn.disabled = true;
-        submitBtn.textContent = 'SENDING...';
-        formMessage.style.display = 'none';
+      console.log("EmailJS SUCCESS:", response);
 
-        try {
-          // Send via EmailJS
-          const response = await emailjs.send(
-            'service_w0y8mi5',           // your EmailJS Service ID
-            'template_yt5z9ai',          // your EmailJS Template ID
-            {
-              from_name: userName,
-              from_email: userEmail,
-              message: userMsg
-            }
-          );
+      formMessage.textContent = "✓ Message sent successfully!";
+      formMessage.style.color = "#7CFFB2";
+      formMessage.style.display = "block";
 
-          formMessage.textContent = '✓ Message sent! I\'ll get back to you soon.';
-          formMessage.style.color = 'var(--gold-light)';
-          formMessage.style.display = 'block';
-          contactForm.reset();
-        } catch (error) {
-          console.error('EmailJS Error:', error);
-          formMessage.textContent = '✗ Error sending message. Please try again.';
-          formMessage.style.color = '#ff6b6b';
-          formMessage.style.display = 'block';
-        } finally {
-          submitBtn.disabled = false;
-          submitBtn.textContent = 'SEND ENQUIRY';
-        }
-      });
+      contactForm.reset();
+
+    } catch (error) {
+      console.error("EMAILJS ERROR FULL:", error);
+
+      formMessage.textContent = "✗ Failed to send message.";
+      formMessage.style.color = "#ff6b6b";
+      formMessage.style.display = "block";
+    }
+
+    submitBtn.disabled = false;
+    submitBtn.textContent = "SEND ENQUIRY";
+  });
+
+
+
+
+
+
+
+  /* =====================================================
+     PARTICLES
+  ===================================================== */
+  const canvas = document.getElementById('particleCanvas');
+  const ctx = canvas.getContext('2d');
+
+  let particles = [];
+
+  function initCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+
+  class Particle {
+    constructor() {
+      this.reset();
+    }
+
+    reset() {
+      this.x = Math.random() * canvas.width;
+      this.y = Math.random() * canvas.height;
+      this.size = Math.random() * 1.5 + 0.5;
+      this.speedX = (Math.random() - 0.5) * 0.4;
+      this.speedY = (Math.random() - 0.5) * 0.4;
+      this.opacity = Math.random() * 0.5;
+    }
+
+    update() {
+      this.x += this.speedX;
+      this.y += this.speedY;
+
+      if (
+        this.x < 0 ||
+        this.x > canvas.width ||
+        this.y < 0 ||
+        this.y > canvas.height
+      ) {
+        this.reset();
+      }
+    }
+
+    draw() {
+      ctx.fillStyle = `rgba(212,160,160,${this.opacity})`;
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+      ctx.fill();
     }
   }
 
-  initContactForm();
+  initCanvas();
+
+  for (let i = 0; i < 115; i++) {
+    particles.push(new Particle());
+  }
+
+  function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    particles.forEach(p => {
+      p.update();
+      p.draw();
+    });
+
+    requestAnimationFrame(animate);
+  }
+
+  animate();
+  window.addEventListener('resize', initCanvas);
+
+  /* =====================================================
+     CUSTOM CURSOR
+  ===================================================== */
+  (function initCustomCursor() {
+    const cursor = document.getElementById('cursor');
+    const follower = document.getElementById('cursor-follower');
+    if (!cursor || !follower) return;
+
+    let mouseHandler = null;
+
+    function enableCursor() {
+      if (mouseHandler) return;
+
+      document.body.style.cursor = 'none';
+
+      mouseHandler = (e) => {
+        cursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+        follower.style.transform = `translate(${e.clientX - 16}px, ${e.clientY - 16}px)`;
+      };
+
+      document.addEventListener('mousemove', mouseHandler);
+    }
+
+    function disableCursor() {
+      if (mouseHandler) {
+        document.removeEventListener('mousemove', mouseHandler);
+        mouseHandler = null;
+      }
+      document.body.style.cursor = 'auto';
+    }
+
+    function checkSize() {
+      if (window.innerWidth > 768) enableCursor();
+      else disableCursor();
+    }
+
+    checkSize();
+    window.addEventListener('resize', checkSize);
+  })();
+
+  /* =====================================================
+     NAV ACTIVE SECTION
+  ===================================================== */
+  const sections = document.querySelectorAll("section");
+  const navLinks = document.querySelectorAll(".nav-link");
+
+  window.addEventListener("scroll", () => {
+    let current = "";
+
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop;
+      if (pageYOffset >= sectionTop - 200) {
+        current = section.getAttribute("id");
+      }
+    });
+
+    navLinks.forEach(link => {
+      link.classList.remove("active");
+
+      if (link.getAttribute("href") === `#${current}`) {
+        link.classList.add("active");
+      }
+    });
+  });
+
+  /* =====================================================
+     PROJECT TRANSITION
+  ===================================================== */
+  window.handleProjectClick = function (card) {
+    const destination = card.getAttribute('data-url');
+
+    card.classList.add('spinning');
+
+    const container = document.getElementById('pearlTransition');
+    container.innerHTML = '';
+
+    for (let i = 0; i < 170; i++) {
+      const pearl = document.createElement('div');
+      pearl.classList.add('pearl');
+
+      const size = (Math.random() * 18) + 10;
+
+      pearl.style.width = size + 'px';
+      pearl.style.height = size + 'px';
+      pearl.style.left = Math.random() * 100 + 'vw';
+
+      pearl.style.animationDelay = (Math.random() * 0.35) + 's';
+      pearl.style.animationDuration = (Math.random() * 0.8 + 1.8) + 's';
+
+      container.appendChild(pearl);
+    }
+
+    setTimeout(() => {
+      window.location.href = destination;
+    }, 1900);
+  };
+
+  /* =====================================================
+     TECH STACK AUTO SCROLL
+  ===================================================== */
+  const techGrid = document.getElementById("techGrid");
+
+  if (techGrid) {
+    let autoScroll = true;
+
+    function autoMove() {
+      if (autoScroll) {
+        techGrid.scrollLeft += 0.5;
+
+        if (techGrid.scrollLeft >= techGrid.scrollWidth - techGrid.clientWidth) {
+          techGrid.scrollLeft = 0;
+        }
+      }
+      requestAnimationFrame(autoMove);
+    }
+
+    autoMove();
+
+    let resumeTimer = null;
+
+    function pauseAutoScroll(ms = 2000) {
+      autoScroll = false;
+      clearTimeout(resumeTimer);
+      resumeTimer = setTimeout(() => autoScroll = true, ms);
+    }
+
+    techGrid.addEventListener('pointerdown', () => pauseAutoScroll(2500));
+    techGrid.addEventListener('touchstart', () => pauseAutoScroll(2500));
+    techGrid.addEventListener('scroll', () => pauseAutoScroll(1500));
+    techGrid.addEventListener('wheel', () => pauseAutoScroll(1500));
+
+    techGrid.addEventListener("mouseenter", () => autoScroll = false);
+    techGrid.addEventListener("mouseleave", () => autoScroll = true);
+
+    document.querySelectorAll('.tech-arrow').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const dir = btn.classList.contains('left') ? -1 : 1;
+        techGrid.scrollBy({ left: dir * 250, behavior: 'smooth' });
+      });
+    });
+  }
 
 });
-
-
-
-  </script>
-
-<!-- EmailJS SDK with async loading -->
-<script async src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/index.min.js" onload="emailjs.init('5rVtGNS8EdizDtf9j');"></script>
-
-<!-- 3d model script here -->
-<script>
-// Reveal the hero model on mobile when the user scrolls or touches the screen
-(function () {
-  if (typeof window === 'undefined') return;
-
-  function initMobileModelReveal() {
-    if (window.innerWidth > 768) return;
-
-    const heroModel = document.querySelector('.hero-model');
-    if (!heroModel) return;
-
-    let revealed = false;
-
-    function reveal() {
-      if (revealed) return;
-      heroModel.classList.add('revealed');
-      revealed = true;
-      window.removeEventListener('scroll', onScroll);
-      window.removeEventListener('touchstart', onTouch);
-    }
-
-    function onScroll() {
-      if (window.scrollY > 20) reveal();
-    }
-
-    function onTouch() {
-      reveal();
-    }
-
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('touchstart', onTouch, { passive: true });
-  }
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initMobileModelReveal);
-  } else {
-    initMobileModelReveal();
-  }
-
-})();
 </script>
-<script type="module"
-src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js">
-</script>
-
-</body>
-</html>
