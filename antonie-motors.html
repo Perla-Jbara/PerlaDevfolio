@@ -183,54 +183,228 @@
     <div id="mobile" class="tab-content active">
       <header class="hero">
         <div class="subtitle">AUTOMOTIVE MANAGEMENT SYSTEM</div>
-        <h1 class="project-title">Antonie <em>Motors</em></h1>
+        <h1 class="project-title">Antonie Motors <em>Mobile</em></h1>
         <div class="tech-row">
           <span class="tag">KOTLIN</span>
           <span class="tag">FIREBASE</span>
-          <span class="tag">BIOMETRIC AUTH</span>
+          <span class="tag">BIOMETRIC AUTHENTICATION</span>
+          <span class="tag">ROLE-BASED ACCESS CONTROL (RBAC)</span>
         </div>
         <div class="btn-row">
           <a href="https://github.com/PerlaJbara/XBCAD7319-MobileAppPOE.git" target="_blank" class="cv-btn">MOBILE REPO</a>
         </div>
       </header>
 
-      <section id="overview">
+
+
+       <section id="overview">
         <h2 class="section-title">The <em>App</em></h2>
         <div class="content-text">
-          <p>An Android business platform designed for seamless vehicle dealership management. Featuring robust Role-Based Access Control (RBAC), the system scales from employee task tracking to high-level administrative oversight.</p>
+          <p><p>
+A role-based automotive management system that enables employees and administrators to manage vehicle operations, documents, and performance data in real time. The system is designed for scalability, security, and operational efficiency.
+</p>
         </div>
-        <div class="feature-grid">
-          <div class="feature-card">
-            <i data-lucide="shield-check"></i>
-            <h3>Security</h3>
-            <p style="color: #888;">Biometric authentication ensures that sensitive financial data and document editing remain protected.</p>
-          </div>
-          <div class="feature-card">
-            <i data-lucide="file-text"></i>
-            <h3>Documents</h3>
-            <p style="color: #888;">Instant PDF generation for quotations and receipts, shared directly with customers.</p>
-          </div>
-          <div class="feature-card">
-            <i data-lucide="bar-chart-3"></i>
-            <h3>Insights</h3>
-            <p style="color: #888;">Full performance leaderboards and inventory tracking for real-time stock management.</p>
-          </div>
-        </div>
-      </section>
+       <div class="feature-grid">
 
-      <section id="collab">
-        <h2 class="section-title">Collaborative <em>Dynamics</em></h2>
-        <div class="collab-container">
-          <div class="collab-row">
-            <div class="collab-role">MY FOCUS</div>
-            <div class="collab-desc">Designed the Biometric security layer, PDF document generation engine, and Employee performance logic.</div>
-          </div>
-          <div class="collab-row">
-            <div class="collab-role">TEAM EFFORT</div>
-            <div class="collab-desc">Firebase Realtime Database architecture and global inventory management systems.</div>
-          </div>
-        </div>
+  <div class="feature-card">
+    <i data-lucide="shield-check"></i>
+    <h3>Secure Access Control</h3>
+    <p style="color: #888;">
+      Biometric authentication combined with role-based permissions ensures only authorised users can access sensitive business data.
+    </p>
+  </div>
+
+  <div class="feature-card">
+    <i data-lucide="file-text"></i>
+    <h3>Automated Documentation</h3>
+    <p style="color: #888;">
+      Generates and distributes professional PDF invoices and quotations instantly, reducing manual admin workload.
+    </p>
+  </div>
+
+  <div class="feature-card">
+    <i data-lucide="bar-chart-3"></i>
+    <h3>Operational Intelligence</h3>
+    <p style="color: #888;">
+      Real-time performance tracking and inventory insights to support data-driven decision making.
+    </p>
+  </div>
+
+</div>
       </section>
+      
+
+      <section id="problemstatement">
+  <h2 class="section-title">The <em>Problem</em></h2>
+
+  <div class="content-text">
+    <p>
+      Antonie Motors needed a modern system to replace manual workflows in vehicle servicing, invoicing, and staff coordination.
+      Existing processes were slow, inconsistent, and lacked real-time visibility between staff and management.
+    </p>
+
+    <p>
+      The goal was to design a connected mobile and web platform that improves communication, automates administrative tasks,
+      and centralises all operational data into one secure system.
+    </p>
+  </div>
+</section>
+
+       <!-- <section id="problemstatement">
+        <h2 class="section-title">The <em>Problem Statement</em></h2>
+        <div class="content-text">
+          <p>The development of an integrated mobile app and web app for Antonie Motors in today's
+           competitive automotive repair industry, efficient communication and seamless invoice processes
+           was essential for maintaining customer satisfaction and operational efficiency. 
+           The aim was to enhance customer interaction and administrative tasks by developing 
+          a comprehensive mobile application and web application. The primary goal for this project
+          was to integrate modern communication tools and automate routine processes to improve service
+          delivery and client experience. </p>
+
+          <p>
+            Antonie Motors was designed to enhance the efficiency and administration of
+            automobile repair businesses through a user-friendly digital platform. The digital
+            platform took the form of a website and it came with a connected mobile application.
+            the website utilised the .NET framework and the Model View Controller (MVC) architecture.
+            It provided the basic information to the customers regarding the automobile repair shops and 
+            served as the customer's interface to use the system and interact with the business.
+            <br> The mobile application was built using Kotlin and the Android Studio and runs only 
+            only Android devices. The app was designed to streamline and increase the efficiency of
+            the administrative duties of the business owners.
+
+          </p>
+        
+      </section> -->
+
+
+     
+
+      <section>
+  <h2 class="section-title">System <em>Design</em></h2>
+
+  <div class="content-text">
+    <p>
+      The mobile application communicates with Firebase Realtime Database to ensure instant synchronization between users.
+      Offline caching was implemented to allow uninterrupted usage in low-connectivity environments.
+    </p>
+
+    <p>
+      Role-based access control separates functionality between administrators and employees, ensuring secure and structured data flow across the system.
+    </p>
+  </div>
+</section>
+
+
+
+     <section id="collab">
+  <h2 class="section-title">Collaborative <em>Dynamics</em></h2>
+
+  <div class="collab-container">
+
+    <div class="collab-row">
+      <div class="collab-role">MY ROLE</div>
+      <div class="collab-desc">
+        Project Leader / Manager, UI/UX Designer, and Full-Stack Developer in a 5-person team.
+      </div>
+    </div>
+
+    <div class="collab-row">
+      <div class="collab-role">CORE RESPONSIBILITIES</div>
+      <div class="collab-desc">
+        Led system design and coordination across frontend and backend development, ensuring smooth integration between mobile features and backend services.
+      </div>
+    </div>
+
+    <div class="collab-row">
+      <div class="collab-role">BACKEND & SYSTEM LOGIC</div>
+      <div class="collab-desc">
+        Developed the RBAC (Role-Based Access Control) system, authentication flow (login, registration, biometric authentication), leave management backend, and task assignment system for administrators.
+      </div>
+    </div>
+
+    <div class="collab-row">
+      <div class="collab-role">FEATURE DEVELOPMENT</div>
+      <div class="collab-desc">
+        Implemented task filtering, service page filtering, to-do list functionality, live employee leaderboard with opt-in/out capability, and real-time analytics components.
+      </div>
+    </div>
+
+    <div class="collab-row">
+      <div class="collab-role">PRODUCT & UX</div>
+      <div class="collab-desc">
+        Designed and maintained the UI/UX for both employee and business owner flows, ensuring a seamless experience across different user roles. Also enabled dual registration for employees and businesses within the same system.
+      </div>
+    </div>
+
+    <div class="collab-row">
+      <div class="collab-role">DOCUMENTATION</div>
+      <div class="collab-desc">
+        Produced full project documentation covering system architecture, feature breakdowns, and technical implementation details for both mobile and web components.
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<section id="challenges">
+  <h2 class="section-title">Challenges & <em>Solutions</em></h2>
+
+  <div class="content-text">
+
+    <p>
+      During development of the Antonie Motors system, several technical and architectural challenges arose that required careful system design and problem-solving.
+    </p>
+
+  </div>
+
+  <div class="collab-container">
+
+    <div class="collab-row">
+      <div class="collab-role">CHALLENGE: ROLE-BASED SYSTEM COMPLEXITY</div>
+      <div class="collab-desc">
+        Managing multiple user roles (employee, admin, business owner) created complex access control requirements across the app.
+      </div>
+    </div>
+
+    <div class="collab-row">
+      <div class="collab-role">SOLUTION</div>
+      <div class="collab-desc">
+        Designed and implemented a structured RBAC system that dynamically controlled feature access based on user roles, ensuring security and preventing unauthorized actions across both mobile and backend systems.
+      </div>
+    </div>
+
+    <div class="collab-row">
+      <div class="collab-role">CHALLENGE: REAL-TIME DATA CONSISTENCY</div>
+      <div class="collab-desc">
+        Ensuring that employee performance data, leaderboards, and task updates reflected accurately and in real time across users.
+      </div>
+    </div>
+
+    <div class="collab-row">
+      <div class="collab-role">SOLUTION</div>
+      <div class="collab-desc">
+        Leveraged Firebase real-time capabilities and optimized data structure design to ensure consistent updates across devices, including live leaderboard synchronization and task status updates.
+      </div>
+    </div>
+
+    <div class="collab-row">
+      <div class="collab-role">CHALLENGE: MULTI-SYSTEM INTEGRATION</div>
+      <div class="collab-desc">
+        Integrating authentication, biometric login, task management, and document generation into a single seamless workflow.
+      </div>
+    </div>
+
+    <div class="collab-row">
+      <div class="collab-role">SOLUTION</div>
+      <div class="collab-desc">
+        Implemented modular architecture separating authentication, business logic, and UI layers, allowing each system to function independently while maintaining smooth integration across the application.
+      </div>
+    </div>
+
+  </div>
+</section>
+
 
       <section id="gallery">
         <h2 class="section-title">Mobile <em>Vault</em></h2>
@@ -257,9 +431,9 @@
         <div class="subtitle">ENTERPRISE WEB PORTAL</div>
         <h1 class="project-title">Antonie <em>Web</em></h1>
         <div class="tech-row">
-          <span class="tag">ASP.NET CORE</span>
+          <span class="tag">ASP.NET CORE Framework</span>
           <span class="tag">C#</span>
-          <span class="tag">MVC</span>
+          <span class="tag">Model View Controller (MVC)</span>
         </div>
         <div class="btn-row">
           <a href="https://github.com/Daniel-Antonie/AntonieMotors-XBCAD7319" target="_blank" class="cv-btn">WEB REPO</a>
