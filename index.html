@@ -1840,36 +1840,25 @@ model-viewer {
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 
 <script>
+
+ 
 document.addEventListener("DOMContentLoaded", () => {
 
-
-
-  /* =========================
-     EMAILJS INIT
-  ========================= */
   emailjs.init("5rVtGNS8EdizDtf9j");
 
   const contactForm = document.getElementById("contactForm");
   const submitBtn = document.getElementById("submitBtn");
   const formMessage = document.getElementById("formMessage");
 
-  if (!contactForm) {
-    console.error("Contact form not found!");
-    return;
-  }
-
   contactForm.addEventListener("submit", async (e) => {
-    e.preventDefault(); // 
+    e.preventDefault();
 
     const name = document.getElementById("userName").value.trim();
     const email = document.getElementById("userEmail").value.trim();
     const message = document.getElementById("userMsg").value.trim();
 
-    console.log("Form submitted:", { name, email, message });
-
     if (!name || !email || !message) {
       formMessage.textContent = "Please fill in all fields.";
-      formMessage.style.color = "#ffcc00";
       formMessage.style.display = "block";
       return;
     }
@@ -1879,17 +1868,28 @@ document.addEventListener("DOMContentLoaded", () => {
     formMessage.style.display = "none";
 
     try {
-      const response = await emailjs.send(
+
+      // 1️⃣ SEND TO YOU
+      await emailjs.send(
         "service_w0y8mi5",
-        "template_yt5z9ai",
+        "template_xncz78l",
         {
-          from_name: name,    
+          from_name: name,
           from_email: email,
           message: message
         }
       );
 
-      console.log("EmailJS SUCCESS:", response);
+      // 2️⃣ AUTO REPLY TO USER
+      await emailjs.send(
+        "service_w0y8mi5",
+        "template_yt5z9ai",
+        {
+          from_name: name,
+          from_email: email,
+          message: message
+        }
+      );
 
       formMessage.textContent = "✓ Message sent successfully!";
       formMessage.style.color = "#7CFFB2";
@@ -1898,7 +1898,8 @@ document.addEventListener("DOMContentLoaded", () => {
       contactForm.reset();
 
     } catch (error) {
-      console.error("EMAILJS ERROR FULL:", error);
+
+      console.error("EmailJS Error:", error);
 
       formMessage.textContent = "✗ Failed to send message.";
       formMessage.style.color = "#ff6b6b";
@@ -1908,6 +1909,8 @@ document.addEventListener("DOMContentLoaded", () => {
     submitBtn.disabled = false;
     submitBtn.textContent = "SEND ENQUIRY";
   });
+
+
 
 
 
