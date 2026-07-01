@@ -1,4 +1,4 @@
- <style>
+
     :root {
       --obsidian-dark: #050507;
       --obsidian-panel: #0f1013;
@@ -321,4 +321,4 @@
       z-index: 100;
       pointer-events: none;
     }
-  </style>
+  
