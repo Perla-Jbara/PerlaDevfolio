@@ -1,0 +1,86 @@
+body {
+  margin: 0;
+  overflow: hidden;
+  background: #050505;
+  font-family: 'Inter', sans-serif;
+}
+
+/* CANVAS */
+#scene {
+  width: 100vw;
+  height: 100vh;
+  display: block;
+}
+
+/* LOADER */
+#loader {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at center, #0a0a0a, #000);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  color: #e1b1b1;
+}
+
+.wheel {
+  width: 90px;
+  height: 90px;
+  border: 2px solid #d4a0a0;
+  border-radius: 50%;
+  position: relative;
+  animation: spin 2s linear infinite;
+}
+
+.pearl-core {
+  width: 18px;
+  height: 18px;
+  background: white;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 20px #d4a0a0;
+}
+
+@keyframes spin {
+  100% { transform: rotate(360deg); }
+}
+
+/* SKIP */
+#skipBtn {
+  position: fixed;
+  top: 15px;
+  right: 15px;
+  z-index: 10000;
+  background: transparent;
+  border: 1px solid #d4a0a0;
+  color: #d4a0a0;
+  padding: 8px 14px;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+/* UI TEXT */
+#ui {
+  position: fixed;
+  bottom: 40px;
+  width: 100%;
+  text-align: center;
+  color: #fff;
+  z-index: 10;
+}
+
+#ui h1 {
+  font-size: 2rem;
+  color: #e1b1b1;
+  letter-spacing: 3px;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  #ui h1 { font-size: 1.4rem; }
+}
