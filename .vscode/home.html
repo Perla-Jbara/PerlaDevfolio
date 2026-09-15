@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <script>
+    // Prevents a flash of unstyled content when arriving via the pearl
+    // transition — must run before any CSS parses.
+    (function () {
+      try {
+        if (sessionStorage.getItem('ptEntering') === '1') {
+          document.documentElement.classList.add('pt-entering');
+        }
+      } catch (e) {}
+    })();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#050505" />
+  <title>Perla Jbara | Portfolio</title>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300&family=Inter:wght@300;500&display=swap" rel="stylesheet">
+
+  <!-- model-viewer web component (required to render the 3D logo below) -->
+  <script type="module" src="https://unpkg.com/@google/model-viewer@3.5.0/dist/model-viewer.min.js"></script>
+
+    <link rel="stylesheet" href="homestyles.css">
+    <link rel="stylesheet" href="pearl-transition.css">
+
+</head>
+<body>
+ 
+
+  <canvas id="particleCanvas"></canvas>
+
+  <div id="cursor"></div>
+  <div id="cursor-follower"></div>
+
+  <div id="pearlTransition" aria-hidden="true">
+    <div class="pt-curtain"></div>
+    <div class="pt-pearls"></div>
+  </div>
+
+  <!-- NAV -->
+  <nav class="nav-vault">
+    <div class="logo-container">
+      <img src="images/mypics/pearllogo.png" alt="Logo">
+    </div>
+
+    <div class="nav-links">
+      <a href="#home" class="nav-link active">HOME</a>
+      <a href="#about" class="nav-link">ABOUT</a>
+      <a href="#tech" class="nav-link">SKILLS</a>
+      <a href="#work" class="nav-link">VAULT</a>
+      <a href="#contact" class="nav-link">MAIL</a>
+    </div>
+  </nav>
+
+  <main>
+
+    <!-- HERO -->
+    <!-- HERO -->
+<section class="hero" id="home">
+
+  <div class="hero-content">
+
+    <!-- LEFT SIDE TEXT -->
+    <div class="hero-text">
+
+      <!-- NAME (BIGGER) -->
+      <div class="name-container"
+      style="
+      font-family: var(--font-serif);
+      font-size: clamp(9rem, 22vw, 16rem);
+      line-height: 0.82;
+      ">
+
+        <span class="first-name" style="color:white;">Perla</span>
+
+        <span class="last-name"
+        style="
+        color:var(--gold-light);
+        font-style:italic;
+        ">
+          Jbara
+        </span>
+
+      </div>
+
+      <!-- ROLE UNDER NAME -->
+      <div style="margin-top: 1.2rem;">
+        <span style="
+          letter-spacing: 0.45em;
+          color: var(--gold-light);
+          font-size: 0.85rem;
+        ">
+          FULL STACK SOFTWARE ENGINEER
+        </span>
+      </div>
+
+      <!-- BUTTON UNDER ROLE -->
+      <div style="margin-top: 2rem;">
+        <a href="cv.pdf" download class="cv-btn">
+          DOWNLOAD CV
+        </a>
+      </div>
+
+    </div>
+
+    <!-- RIGHT SIDE 3D MODEL -->
+    <div class="hero-model">
+
+      <model-viewer
+        src="images/models/logo.glb"
+        alt="Perla Logo"
+
+        auto-rotate
+        rotation-per-second="10deg"
+
+        camera-controls
+        disable-zoom
+        interaction-prompt="none"
+        touch-action="pan-y"
+
+        shadow-intensity="1"
+        exposure="1.2"
+        environment-image="neutral"
+
+        style="width:100%; height:100%;"
+      >
+      </model-viewer>
+
+    </div>
+
+  </div>
+
+</section>
+
+    <!-- ABOUT -->
+    <section id="about" style="padding: 10rem 5%;">
+
+      <h2 class="section-title">
+        About <em>Me</em>
+      </h2>
+
+      <div class="about-content"
+      style="
+      display:flex;
+      flex-wrap:wrap;
+      gap:4rem;
+      justify-content:center;
+      align-items:center;
+      ">
+
+        <div class="portrait-frame">
+          <img src="images/mypics/selfportrait.jpeg" alt="Perla Jbara">
+        </div>
+
+        <p style="
+        max-width:650px;
+        color:#ccc;
+        line-height:1.8;
+        font-size:1.1rem;
+        font-weight:300;
+        ">
+          I am Perla Jbara, a Full Stack Software Engineer and Master’s student specializing in advanced Algorithm Analysis. I approach development with precision and structure, aiming to write code that is efficient, scalable, and easy to maintain.
+        </p>
+
+      </div>
+    </section>
+
+    <!-- TECH -->
+    <section id="tech" style="padding: 5rem 5%;">
+
+      <h2 class="section-title">
+        Technical <em>Stack</em>
+      </h2>
+
+     <div class="tech-wrapper">
+
+  <button type="button" class="tech-arrow left" aria-label="scroll left">‹</button>
+
+  <div class="tech-grid" id="techGrid">
+
+    <div class="tech-track">
+      <div class="tech-card"><i class="devicon-csharp-plain"></i><span>.NET CORE</span></div>
+      <div class="tech-card"><i class="devicon-kotlin-plain"></i><span>KOTLIN</span></div>
+      <div class="tech-card"><i class="devicon-azure-plain"></i><span>AZURE</span></div>
+      <div class="tech-card"><i class="devicon-react-original"></i><span>REACT JS</span></div>
+      <div class="tech-card"><i class="devicon-python-plain"></i><span>PYTHON</span></div>
+      <div class="tech-card"><i class="devicon-microsoftsqlserver-plain"></i><span>SQL SERVER</span></div>
+      <div class="tech-card"><i class="devicon-android-plain"></i><span>ANDROID</span></div>
+      <div class="tech-card"><i class="devicon-dotnetcore-plain"></i><span>ASP.NET</span></div>
+      <div class="tech-card"><i class="devicon-java-plain"></i><span>JAVA</span></div>
+      <div class="tech-card"><i class="devicon-javascript-plain"></i><span>JAVASCRIPT</span></div>
+      <div class="tech-card"><i class="devicon-html5-plain"></i><span>HTML5</span></div>
+      <div class="tech-card"><i class="devicon-css3-plain"></i><span>CSS3</span></div>
+      <div class="tech-card"><i class="devicon-firebase-plain"></i><span>FIREBASE</span></div>
+      <div class="tech-card"><i class="devicon-github-original"></i><span>GITHUB</span></div>
+    </div>
+
+    <!-- Duplicate set (hidden from assistive tech) so the loop can wrap seamlessly -->
+    <div class="tech-track" aria-hidden="true">
+      <div class="tech-card"><i class="devicon-csharp-plain"></i><span>.NET CORE</span></div>
+      <div class="tech-card"><i class="devicon-kotlin-plain"></i><span>KOTLIN</span></div>
+      <div class="tech-card"><i class="devicon-azure-plain"></i><span>AZURE</span></div>
+      <div class="tech-card"><i class="devicon-react-original"></i><span>REACT JS</span></div>
+      <div class="tech-card"><i class="devicon-python-plain"></i><span>PYTHON</span></div>
+      <div class="tech-card"><i class="devicon-microsoftsqlserver-plain"></i><span>SQL SERVER</span></div>
+      <div class="tech-card"><i class="devicon-android-plain"></i><span>ANDROID</span></div>
+      <div class="tech-card"><i class="devicon-dotnetcore-plain"></i><span>ASP.NET</span></div>
+      <div class="tech-card"><i class="devicon-java-plain"></i><span>JAVA</span></div>
+      <div class="tech-card"><i class="devicon-javascript-plain"></i><span>JAVASCRIPT</span></div>
+      <div class="tech-card"><i class="devicon-html5-plain"></i><span>HTML5</span></div>
+      <div class="tech-card"><i class="devicon-css3-plain"></i><span>CSS3</span></div>
+      <div class="tech-card"><i class="devicon-firebase-plain"></i><span>FIREBASE</span></div>
+      <div class="tech-card"><i class="devicon-github-original"></i><span>GITHUB</span></div>
+    </div>
+
+  </div>
+
+  <button type="button" class="tech-arrow right" aria-label="scroll right">›</button>
+
+</div>
+
+    </section>
+
+
+  <!-- <div>✦ Module A</div>-->
+    <!-- EDUCATION -->
+ 
+ <section id="education" style="padding: 5rem 5%;">
+
+  <h2 class="section-title">
+    Academic <em>Vault</em>
+  </h2>
+
+  <div class="edu-timeline">
+
+    <!-- ================= MASTERS ================= -->
+    <div class="edu-item">
+
+      <div class="year-label">2024 — 2026</div>
+
+      <h3 class="degree-title">Master of Computer Science</h3>
+
+      <p class="edu-location">Lebanese American University</p>
+
+      <!-- <p class="edu-note">Algorithm Analysis — Specialized Focus</p> -->
+
+     <details class="marks-box">
+
+  <summary>VIEW FULL TRANSCRIPT</summary>
+
+  <div class="vault-card">
+
+    <div class="vault-title">YEAR 1</div>
+
+    <div class="pearl-track">
+
+      <div class="pearl-item">
+        <div class="pearl-dot"></div>
+        Artificial Intelligence Principles and Techniques
+        <span>79%</span>
+      </div>
+
+      <div class="pearl-item">
+        <div class="pearl-dot"></div>
+        Fundamentals of Computer Networks
+        <span>89.99%</span>
+      </div>
+
+      <div class="pearl-item">
+        <div class="pearl-dot"></div>
+        Fundamentals of Database Systems
+        <span>96.66%</span>
+      </div>
+
+      <div class="pearl-item">
+        <div class="pearl-dot"></div>
+        Fundamentals of Data Science
+        <span>85.12%</span>
+      </div>
+
+      <div class="pearl-item">
+        <div class="pearl-dot"></div>
+        Design and Analysis of Algorithms
+        <span>86.80%</span>
+      </div>
+
+    </div>
+
+    <div class="vault-title">YEAR 2 — In Progress</div>
+
+    <!-- optional note -->
+    <!-- <div class="vault-note">Year 2 in progress</div> -->
+
+  </div>
+
+</details>
+
+    </div>
+
+    <!-- ================= BACHELOR ================= -->
+    <div class="edu-item">
+
+      <div class="year-label">2022 — 2024</div>
+
+      <h3 class="degree-title">Bachelor Computer and Information Sciences in Application Development</h3>
+
+      <p class="edu-location">IIE Varsity College</p>
+
+      <!-- <p class="edu-note">Software Engineering & System Design</p> -->
+
+      <details class="marks-box">
+
+        <summary>VIEW FULL TRANSCRIPT</summary>
+
+        <div class="vault-card">
+
+          <!-- YEAR 1 -->
+          <div class="vault-title">YEAR 1 — SEMESTER 1</div>
+
+          <div class="pearl-track">
+            <div class="pearl-item"><div class="pearl-dot"></div>Mathematical Principles for Computer Science <span>94%</span></div>
+            <div class="pearl-item"><div class="pearl-dot"></div>Network Engineering 1A <span>89%</span></div>
+            <div class="pearl-item"><div class="pearl-dot"></div>Programming Logic and Design <span>78%</span></div>
+            <div class="pearl-item"><div class="pearl-dot"></div>Programming 1A <span>77%</span></div>
+          </div>
+
+          <div class="vault-title">YEAR 1 — SEMESTER 2</div>
+
+          <div class="pearl-track">
+            <div class="pearl-item"><div class="pearl-dot"></div>IT Professional Practice <span>98%</span></div>
+            <div class="pearl-item"><div class="pearl-dot"></div>Network Engineering 1B <span>95%</span></div>
+            <div class="pearl-item"><div class="pearl-dot"></div>Programmin 1B <span>93%</span></div>
+             <div class="pearl-item"><div class="pearl-dot"></div>Principles of Security <span>88%</span></div>
+          </div>
+
+          <!-- YEAR 2 -->
+          <div class="vault-title">YEAR 2 — SEMESTER 3</div>
+
+          <div class="pearl-track">
+            <div class="pearl-item"><div class="pearl-dot"></div>Cloud Development A <span>89%</span></div>
+            <div class="pearl-item"><div class="pearl-dot"></div>Databases <span>93%</span></div>
+            <div class="pearl-item"><div class="pearl-dot"></div>Programming 2A <span>97%</span></div>
+            <div class="pearl-item"><div class="pearl-dot"></div>System Analysis and Design <span>95%</span></div>
+          </div>
+
+          <div class="vault-title">YEAR 2 — SEMESTER 4</div>
+
+          <div class="pearl-track">
+            <div class="pearl-item"><div class="pearl-dot"></div>Advanced Datanbases <span>96%</span></div>
+            <div class="pearl-item"><div class="pearl-dot"></div>Cloud Development B <span>97%</span></div>
+            <div class="pearl-item"><div class="pearl-dot"></div>Programming 2B <span>100%</span></div>
+            <div class="pearl-item"><div class="pearl-dot"></div>Software Engineering <span>89%</span></div>
+          </div>
+
+          <!-- YEAR 3 -->
+          <div class="vault-title">YEAR 3 — SEMESTER 5</div>
+
+          <div class="pearl-track">
+            <div class="pearl-item"><div class="pearl-dot"></div>Introduction to Research <span>97%</span></div>
+            <div class="pearl-item"><div class="pearl-dot"></div>IT Project Management <span>86%</span></div>
+            <div class="pearl-item"><div class="pearl-dot"></div>Open Source Coding (Introduction) <span>94%</span></div>
+            <div class="pearl-item"><div class="pearl-dot"></div>Programming 3A <span>97%</span></div>
+          </div>
+
+          <div class="vault-title">YEAR 3 — SEMESTER 6</div>
+
+          <div class="pearl-track">
+            <div class="pearl-item"><div class="pearl-dot"></div>Application Development Security <span>92%</span></div>
+            <div class="pearl-item"><div class="pearl-dot"></div>Open Source Coding (Intermediate) <span>97%</span></div>
+            <div class="pearl-item"><div class="pearl-dot"></div>Programming 3B <span>94%</span></div>
+            <div class="pearl-item"><div class="pearl-dot"></div>Work Integrated Learning 3 <span>86%</span></div>
+          </div>
+
+        </div>
+
+      </details>
+
+    </div>
+
+  </div>
+</section>
+    
+
+      
+
+
+    <!-- PROJECTS -->
+    <section id="work" style="padding: 5rem 5%;">
+
+      <h2 class="section-title">
+        Project <em>Vault</em>
+      </h2>
+
+      <div class="project-grid">
+
+        <!-- Gourmet Guru -->
+        <div class="project-card"
+        data-url="gourmet-guru.html"
+        onclick="handleProjectClick(this)">
+
+          <img src="images/gourmetguru/gglogo.png" class="project-img">
+
+          <div style="padding:2rem;">
+            <div style="margin-bottom:1rem;">
+              <span class="tag">ANDROID</span>
+              <span class="tag">MOBILE</span>
+            </div>
+
+            <h3 style="
+            font-family:var(--font-serif);
+            font-size:2rem;
+            color:var(--gold-light);
+            ">
+              Gourmet Guru
+            </h3>
+          </div>
+        </div>
+
+        <!-- Antonie Motors -->
+        <div class="project-card"
+        data-url="antonie-motors.html"
+        onclick="handleProjectClick(this)">
+
+          <img src="images/antoniemotors/amlogo.jpeg" class="project-img">
+
+          <div style="padding:2rem;">
+            <div style="margin-bottom:1rem;">
+              <span class="tag">MOBILE & WEB</span>
+            </div>
+
+            <h3 style="
+            font-family:var(--font-serif);
+            font-size:2rem;
+            color:var(--gold-light);
+            ">
+              Antonie Motors
+            </h3>
+          </div>
+        </div>
+
+        <!-- Timewize -->
+        <div class="project-card"
+        data-url="timewize.html"
+        onclick="handleProjectClick(this)">
+
+          <img src="images/timewize/twindexpage.png" class="project-img">
+
+          <div style="padding:2rem;">
+            <div style="margin-bottom:1rem;">
+              <span class="tag">ANDROID STUDIO</span>
+            </div>
+
+            <h3 style="
+            font-family:var(--font-serif);
+            font-size:2rem;
+            color:var(--gold-light);
+            ">
+              Timewize
+            </h3>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- CONTACT -->
+<!-- CONTACT -->
+<section id="contact"
+  style="
+  padding:5rem 5%;
+  text-align:center;
+  max-width:800px;
+  margin:0 auto;
+  ">
+
+  <h2 class="section-title">
+    Get In <em>Touch</em>
+  </h2>
+
+  <form id="contactForm">
+
+    <div class="form-group">
+      <input type="text" class="form-input" id="userName" name="from_name" placeholder=" " required>
+      <label class="form-label" for="userName">NAME & SURNAME</label>
+    </div>
+
+    <div class="form-group">
+      <input type="email" class="form-input" id="userEmail" name="from_email" placeholder=" " required>
+      <label class="form-label" for="userEmail">EMAIL ADDRESS</label>
+    </div>
+
+    <div class="form-group">
+      <textarea
+        class="form-input"
+        id="userMsg"
+        name="message"
+        rows="4"
+        placeholder=" "
+        style="resize:none;"
+        required></textarea>
+
+      <label class="form-label" for="userMsg">YOUR MESSAGE</label>
+    </div>
+
+    <button type="submit" class="cv-btn" id="submitBtn">
+      SEND ENQUIRY
+    </button>
+
+    <div id="formMessage"
+      style="margin-top: 1.5rem; text-align: center; font-size: 0.9rem; display: none;">
+    </div>
+
+  </form>
+</section>
+
+  <!-- EmailJS CDN (MUST be above script) -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
+<script src="homescript.js"></script>
+<script src="pearl-transition.js"></script>
+
+</main>
+</body>
+</html>

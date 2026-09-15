@@ -321,4 +321,129 @@
       z-index: 100;
       pointer-events: none;
     }
+
+    /* ================= SKIP INTRO LINK ================= */
+    .skip-link {
+      position: fixed;
+      right: max(20px, env(safe-area-inset-right));
+      bottom: max(20px, env(safe-area-inset-bottom));
+      z-index: 200;
+      font-family: monospace;
+      font-size: clamp(10px, 1.6vw, 12px);
+      letter-spacing: 2px;
+      color: rgba(212, 160, 160, 0.55);
+      text-decoration: none;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease, color 0.2s ease;
+      padding: 10px 6px; /* larger tap target on mobile */
+    }
+    .skip-link.visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .skip-link:hover,
+    .skip-link:focus-visible {
+      color: var(--rose-gold);
+    }
+
+    /* ================= ENTRY GATE (TAP TO UNLOCK) ================= */
+    .entry-gate {
+      position: fixed;
+      inset: 0;
+      z-index: 300;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(circle at 50% 45%, #0b0c10 0%, #010102 75%);
+      transition: opacity 0.7s ease, visibility 0.7s ease;
+    }
+    .entry-gate.dismissed {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+    .entry-gate-inner {
+      text-align: center;
+      padding: 0 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: clamp(14px, 3vw, 20px);
+    }
+    .entry-mark {
+      width: clamp(56px, 12vw, 72px);
+      height: clamp(56px, 12vw, 72px);
+      border-radius: 50%;
+      border: 1px solid rgba(212, 160, 160, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: monospace;
+      font-size: clamp(16px, 3vw, 20px);
+      letter-spacing: 1px;
+      color: var(--rose-gold);
+      box-shadow: 0 0 30px rgba(212, 160, 160, 0.15), inset 0 0 20px rgba(212, 160, 160, 0.08);
+      animation: pulseRing 3.2s ease-in-out infinite;
+    }
+    @keyframes pulseRing {
+      0%, 100% { box-shadow: 0 0 20px rgba(212, 160, 160, 0.12), inset 0 0 16px rgba(212, 160, 160, 0.06); }
+      50% { box-shadow: 0 0 40px rgba(212, 160, 160, 0.28), inset 0 0 22px rgba(212, 160, 160, 0.12); }
+    }
+    .entry-title {
+      font-family: monospace;
+      font-size: clamp(13px, 3vw, 16px);
+      letter-spacing: clamp(3px, 1vw, 6px);
+      color: var(--pearl-bright);
+    }
+    .entry-role {
+      font-family: monospace;
+      font-size: clamp(9px, 2vw, 11px);
+      letter-spacing: 3px;
+      color: rgba(212, 160, 160, 0.6);
+      margin-top: -8px;
+    }
+    .enter-btn {
+      position: relative;
+      margin-top: clamp(20px, 4vw, 28px);
+      padding: 16px 34px;
+      min-height: 48px; /* comfortable mobile tap target */
+      background: transparent;
+      border: 1px solid var(--rose-gold);
+      border-radius: 50px;
+      color: var(--rose-gold);
+      font-family: monospace;
+      font-size: clamp(11px, 2.4vw, 13px);
+      letter-spacing: 4px;
+      cursor: pointer;
+      overflow: visible;
+      transition: background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .enter-btn:hover,
+    .enter-btn:focus-visible {
+      background: var(--rose-gold);
+      color: #0b0507;
+      box-shadow: 0 0 40px var(--rose-glow);
+    }
+    .enter-btn:active {
+      transform: scale(0.97);
+    }
+    .enter-ring {
+      position: absolute;
+      inset: -8px;
+      border: 1px solid rgba(212, 160, 160, 0.35);
+      border-radius: 50px;
+      animation: ringExpand 2.6s ease-out infinite;
+      pointer-events: none;
+    }
+    @keyframes ringExpand {
+      0% { transform: scale(1); opacity: 0.6; }
+      100% { transform: scale(1.18); opacity: 0; }
+    }
+
+    @media (max-width: 480px) {
+      .entry-gate-inner { gap: 12px; }
+      .enter-btn { padding: 14px 28px; }
+    }
   

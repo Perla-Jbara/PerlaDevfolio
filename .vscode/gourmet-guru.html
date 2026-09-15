@@ -2,7 +2,17 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script>
+    (function () {
+      try {
+        if (sessionStorage.getItem('ptEntering') === '1') {
+          document.documentElement.classList.add('pt-entering');
+        }
+      } catch (e) {}
+    })();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#050505" />
   <title>Gourmet Guru | Project Details</title>
   
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css" />
@@ -145,25 +155,35 @@
       .collab-row { grid-template-columns: 1fr; gap: 0.5rem; }
     }
   </style>
+  <link rel="stylesheet" href="project-enhance.css">
+  <link rel="stylesheet" href="pearl-transition.css">
 </head>
 <body>
+
+  <div id="pearlTransition" aria-hidden="true">
+    <div class="pt-curtain"></div>
+    <div class="pt-pearls"></div>
+  </div>
 
   <canvas id="particleCanvas"></canvas>
   <div id="cursor"></div>
   <div id="cursor-follower"></div>
 
   <nav class="nav-vault">
+    <div class="logo-container">
+      <img src="images/mypics/pearllogo.png" alt="Logo">
+    </div>
     <div class="nav-links">
-      <a href="index.html">HOME</a>
-      <a href="#overview">OVERVIEW</a>
-      <a href="#collab">TEAM</a>
-      <a href="#gallery">GALLERY</a>
-      <a href="#tech">TECH</a>
+      <a href="home.html" class="nav-link" data-pt-link>HOME</a>
+      <a href="#overview" class="nav-link">OVERVIEW</a>
+      <a href="#collab" class="nav-link">TEAM</a>
+      <a href="#gallery" class="nav-link">GALLERY</a>
+      <a href="#tech" class="nav-link">TECH</a>
     </div>
   </nav>
 
   <main>
-    <header class="hero">
+    <header class="hero hero-intro">
       <div class="subtitle">PROJECT SHOWCASE</div>
       <h1 class="project-title">Gourmet <em>Guru</em></h1>
       <div class="tech-wrap">
@@ -312,5 +332,7 @@
       follower.style.transform = `translate(${e.clientX - 16}px, ${e.clientY - 16}px)`;
     });
   </script>
+  <script src="project-enhance.js"></script>
+  <script src="pearl-transition.js"></script>
 </body>
 </html>

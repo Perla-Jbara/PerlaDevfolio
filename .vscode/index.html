@@ -2,8 +2,21 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+  <meta name="theme-color" content="#050507" />
   <title>Perla Jbara | Portfolio</title>
+
+  <script>
+    // Skip the vault intro for anyone who has already unlocked it this session,
+    // so returning visitors (or a recruiter clicking between pages) land straight
+    // on the portfolio. Add ?replay=1 to the URL to force the intro again.
+    (function () {
+      var forceReplay = /[?&]replay=1\b/.test(window.location.search);
+      if (!forceReplay && sessionStorage.getItem('vaultUnlocked') === '1') {
+        window.location.replace('home.html');
+      }
+    })();
+  </script>
 
   <script type="importmap">
     {
@@ -60,6 +73,20 @@
 
   <canvas id="pearls-canvas"></canvas>
   <div class="particles" id="ambient-particles"></div>
+
+  <a href="home.html" class="skip-link" id="skipLink">SKIP INTRO →</a>
+
+  <div class="entry-gate" id="entryGate">
+    <div class="entry-gate-inner">
+      <div class="entry-mark">PJ</div>
+      <div class="entry-title">PERLA JBARA</div>
+      <div class="entry-role">FULL STACK SOFTWARE ENGINEER</div>
+      <button type="button" class="enter-btn" id="enterBtn">
+        <span class="enter-ring"></span>
+        TAP TO UNLOCK
+      </button>
+    </div>
+  </div>
 
  <script type="module" src="indexscript.js"></script>
 </body>
