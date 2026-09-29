@@ -175,17 +175,35 @@ function handleAuthorizationSuccess() {
   }, 200);
 }
 
+// function triggerMechanicalShift() {
+//   const vault = document.getElementById("vault");
+//   vault.classList.add("open");
+//   document.body.classList.add("vault-open");
+
+//   initThreeEngine();
+//   setTimeout(initiatePearlTransition, 2800);
+// }
+
 function triggerMechanicalShift() {
   const vault = document.getElementById("vault");
   vault.classList.add("open");
   document.body.classList.add("vault-open");
 
   initThreeEngine();
-  setTimeout(initiatePearlTransition, 2800);
 }
 
 /* ================= THREE.JS SCENE ================= */
+// let scene, camera, renderer, activeObject;
+
+/* ================= THREE.JS SCENE ================= */
 let scene, camera, renderer, activeObject;
+
+let totalYRotation = 0;
+let revolutionComplete = false;
+
+const FULL_REVOLUTION = Math.PI * 2;
+const ROTATION_SPEED = 0.0131;
+
 
 function initThreeEngine() {
   try {
@@ -289,12 +307,38 @@ function onResize() {
   adjustActiveObjectScale();
 }
 
+// function animateThree() {
+//   requestAnimationFrame(animateThree);
+
+//   if (activeObject) {
+//     activeObject.rotation.y += 0.008;
+//     activeObject.rotation.x += 0.003;
+//   }
+
+//   renderer.render(scene, camera);
+// }
+
 function animateThree() {
   requestAnimationFrame(animateThree);
 
   if (activeObject) {
-    activeObject.rotation.y += 0.008;
+    // Rotate around the Y axis
+    activeObject.rotation.y += ROTATION_SPEED;
+
+    // Keep the original subtle X rotation
     activeObject.rotation.x += 0.003;
+
+    // Track total Y rotation
+    totalYRotation += ROTATION_SPEED;
+
+    // Start the pearl transition only after one full revolution
+    if (
+      totalYRotation >= FULL_REVOLUTION &&
+      !revolutionComplete
+    ) {
+      revolutionComplete = true;
+      initiatePearlTransition();
+    }
   }
 
   renderer.render(scene, camera);
@@ -377,4 +421,4 @@ function animatePearls() {
     pCtx.fill();
   }
 }
-
+
